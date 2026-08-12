@@ -1,0 +1,21 @@
+<!doctype html><body><script>
+function scan(src,X0,X1,Y0,Y1,min){return new Promise(res=>{const im=new Image();im.onload=()=>{
+const c=document.createElement("canvas");c.width=1123;c.height=794;const g=c.getContext("2d");
+g.drawImage(im,0,0,1123,794);const d=g.getImageData(X0,Y0,X1-X0,Y1-Y0).data;
+let t=-1,b=-1;
+for(let y=0;y<Y1-Y0;y++){let n=0;
+for(let x=0;x<X1-X0;x++){const i=(y*(X1-X0)+x)*4;
+if(d[i]<45&&d[i+1]<60&&d[i+2]>85&&d[i+2]<135)n++;}
+if(n>min){if(t<0)t=y+Y0;b=y+Y0;}}
+res([t,b]);};im.src=src;});}
+(async()=>{
+const out={};
+out.titleDom=await scan("dom3.png",330,800,100,215,10);
+out.titleH2c=await scan("h2c4.png",330,800,100,215,10);
+out.nameDom=await scan("dom3.png",400,760,360,455,15);
+out.nameH2c=await scan("h2c4.png",400,760,360,455,15);
+out.dateDom=await scan("dom3.png",180,420,680,730,8);
+out.dateH2c=await scan("h2c4.png",180,420,680,730,8);
+document.body.setAttribute("data-r",JSON.stringify(out));
+})();
+</script></body>

@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css?v=1786545585468" />
+  <link rel="stylesheet" href="style.css?v=20710" />
 </head>
 
 <body>
@@ -121,7 +121,7 @@
           <p class="error-text" data-error-for="standard"></p>
         </div>
 
-        <!-- 6. Favourite AI Tool (logo cards, rendered by script.js) -->
+        <!-- 6. Favourite AI Tool (logo cards, rendered by script.js?v=20710) -->
         <div class="field">
           <span class="field-label" id="toolLabel">Which AI Tool did you like the most? <span class="req">*</span></span>
           <div class="tool-grid" id="toolGrid" role="radiogroup" aria-labelledby="toolLabel"></div>
@@ -274,66 +274,60 @@
 
           <img src="logo.svg" alt="" class="cert-logo" id="certLogo" />
 
-          <h2 class="cert-title">CERTIFICATE</h2>
+          <h2 class="cert-line cert-title">CERTIFICATE</h2>
 
-          <div class="cert-subtitle-row">
-            <span class="cert-rule cert-rule-l"></span>
-            <span class="cert-dot cert-dot-l"></span>
-            <span class="cert-subtitle">OF PARTICIPATION</span>
-            <span class="cert-dot cert-dot-r"></span>
-            <span class="cert-rule cert-rule-r"></span>
-          </div>
+          <span class="cert-rule cert-rule-sub cert-rule-sub-l"></span>
+          <span class="cert-dot cert-dot-sub cert-dot-sub-l"></span>
+          <p class="cert-line cert-subtitle">OF PARTICIPATION</p>
+          <span class="cert-dot cert-dot-sub cert-dot-sub-r"></span>
+          <span class="cert-rule cert-rule-sub cert-rule-sub-r"></span>
 
           <div class="cert-ribbon"><span class="cert-ribbon-tail cert-ribbon-tail-left"></span
             ><span class="cert-ribbon-body">LEVEL 1 AI WORKSHOP</span
             ><span class="cert-ribbon-tail cert-ribbon-tail-right"></span></div>
 
-          <div class="cert-presented-row">
-            <span class="cert-rule cert-rule-sm cert-rule-l"></span>
-            <span class="cert-dot cert-dot-sm cert-dot-l"></span>
-            <span class="cert-presented">This certificate is proudly presented to</span>
-            <span class="cert-dot cert-dot-sm cert-dot-r"></span>
-            <span class="cert-rule cert-rule-sm cert-rule-r"></span>
-          </div>
+          <span class="cert-rule cert-rule-pre cert-rule-pre-l"></span>
+          <span class="cert-dot cert-dot-sm cert-dot-pre cert-dot-pre-l"></span>
+          <p class="cert-line cert-presented">This certificate is proudly presented to</p>
+          <span class="cert-dot cert-dot-sm cert-dot-pre cert-dot-pre-r"></span>
+          <span class="cert-rule cert-rule-pre cert-rule-pre-r"></span>
 
           <!-- Student name — filled from the submitted form data -->
-          <p class="cert-name" id="certName">Student Name</p>
+          <p class="cert-line cert-name" id="certName">Student Name</p>
 
-          <div class="cert-divider">
-            <span class="cert-divider-line cert-divider-line-l"></span>
-            <span class="cert-dot cert-dot-c"></span>
-            <span class="cert-divider-line cert-divider-line-r"></span>
-          </div>
+          <span class="cert-divider-line cert-divider-line-l"></span>
+          <span class="cert-dot cert-dot-div"></span>
+          <span class="cert-divider-line cert-divider-line-r"></span>
 
-          <p class="cert-body">
-            For successfully attending the <strong>Level 1 AI Workshop</strong><br />
+          <p class="cert-line cert-body cert-body-1">
+            For successfully attending the <strong>Level 1 AI Workshop</strong>
+          </p>
+          <p class="cert-line cert-body cert-body-2">
             and actively participating in the session feedback.
           </p>
 
-          <div class="cert-appreciation-row">
-            <span class="cert-star cert-star-left"></span>
-            <p class="cert-appreciation">
-              We appreciate your enthusiasm towards learning Artificial Intelligence<br />
-              and wish you success in your future journey.
-            </p>
-            <span class="cert-star cert-star-right"></span>
-          </div>
+          <span class="cert-star cert-star-l"></span>
+          <p class="cert-line cert-appreciation cert-appreciation-1">
+            We appreciate your enthusiasm towards learning Artificial Intelligence
+          </p>
+          <p class="cert-line cert-appreciation cert-appreciation-2">
+            and wish you success in your future journey.
+          </p>
+          <span class="cert-star cert-star-r"></span>
 
-          <footer class="cert-footer">
-            <div class="cert-foot-col cert-foot-date">
-              <span class="cert-cal-icon"></span>
-              <span class="cert-date" id="certDate">DATE</span>
-              <span class="cert-foot-line"></span>
-              <span class="cert-foot-label">DATE</span>
-            </div>
+          <footer class="cert-foot-col cert-foot-date">
+            <span class="cert-cal-icon"></span>
+            <span class="cert-line cert-date" id="certDate">DATE</span>
+            <span class="cert-foot-line"></span>
+            <span class="cert-line cert-foot-label">DATE</span>
+          </footer>
 
-            <span class="cert-seal"></span>
+          <span class="cert-seal"></span>
 
-            <div class="cert-foot-col cert-foot-sign">
-              <img src="signature.svg" alt="" class="cert-signature" id="certSignature" />
-              <span class="cert-foot-line"></span>
-              <span class="cert-foot-label cert-foot-brand">AI MINDS</span>
-            </div>
+          <footer class="cert-foot-col cert-foot-sign">
+            <img src="signature.svg" alt="" class="cert-signature" id="certSignature" />
+            <span class="cert-foot-line"></span>
+            <span class="cert-line cert-foot-brand">AI MINDS</span>
           </footer>
 
         </div>
@@ -349,5 +343,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script src="script.js"></script>
-<style>body{margin:0;background:#fff}.page,.site-header,.site-footer{display:none!important}.certificate-stage{position:static!important;left:0!important}</style><script>window.addEventListener("load",async()=>{if(document.fonts&&document.fonts.ready)await document.fonts.ready;fillCertificate(decodeURIComponent(location.hash.slice(1)));try{const cv=await html2canvas(document.getElementById("certificate"),{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:1123,height:794,scrollX:0,scrollY:0});const url=cv.toDataURL("image/png");document.getElementById("certificate").style.display="none";const im=new Image();im.src=url;document.body.appendChild(im);}catch(e){document.body.setAttribute("data-st","ERR "+e.message);}});</script></body>
+<style>body{margin:0;background:#fff}.page,.site-header,.site-footer{display:none!important}.certificate-stage{position:static!important;left:0!important}</style><script>window.addEventListener("load",async()=>{if(document.fonts&&document.fonts.ready)await document.fonts.ready;fillCertificate(decodeURIComponent(location.hash.slice(1))||"Prem Sonawane");try{const cv=await html2canvas(document.getElementById("certificate"),{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:1123,height:794,scrollX:0,scrollY:0});const im=new Image();im.src=cv.toDataURL("image/png");document.getElementById("certificate").style.display="none";document.body.appendChild(im);}catch(e){document.body.setAttribute("data-st","ERR "+e.message);}});</script></body>
 </html>

@@ -589,11 +589,24 @@ function toFileNameSafe(name) {
 }
 
 /** Largest and smallest font size used for the student name. */
-const NAME_MAX_FONT_PX = 72;
+const NAME_MAX_FONT_PX = 66;
 const NAME_MIN_FONT_PX = 30;
 
+/** Where the name sits on the certificate, in certificate pixels. */
+const NAME_BASELINE_PX = 404;
+
 /**
- * Shrinks the name until it fits on a single line inside the frame.
+ * The name line uses a tight line-height so the browser and html2canvas
+ * place the baseline identically (see the certificate notes in style.css).
+ * These two ratios convert a font size into that line-height and into the
+ * baseline offset below the element's top edge.
+ */
+const NAME_LINE_HEIGHT_RATIO = 0.35;
+const NAME_BASELINE_RATIO = 0.592;
+
+/**
+ * Shrinks the name until it fits on a single line inside the frame, then
+ * re-anchors it so the baseline stays put whatever the font size is.
  * Measured from the live element, so it is exact for any name length.
  */
 function fitStudentName() {
@@ -607,6 +620,8 @@ function fitStudentName() {
     fontSize -= 2;
     nameEl.style.fontSize = `${fontSize}px`;
   }
+
+  nameEl.style.top = `${NAME_BASELINE_PX - NAME_BASELINE_RATIO * fontSize}px`;
 }
 
 /** Writes the student name and date onto the hidden certificate. */

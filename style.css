@@ -870,9 +870,13 @@ img {
 
 /* ------------------------------------------------------------
    Content.
-   Every block is absolutely positioned on the fixed 1083 x 754
-   canvas: html2canvas reproduces this exactly, and the student
-   name can grow or shrink without moving anything else.
+
+   Every element is absolutely positioned on the fixed 1083 x 754
+   canvas, and every text element is a single line with a very
+   small line-height. html2canvas places a text baseline roughly
+   at (box top + line-height + descent) while browsers centre the
+   glyphs in the line box: keeping line-height tiny makes the two
+   agree, so the on-screen preview and the PDF match exactly.
    ------------------------------------------------------------ */
 .cert-content {
   position: absolute;
@@ -880,16 +884,20 @@ img {
   text-align: center;
 }
 
-.cert-content > * {
+/* One line of text, positioned by its own top offset */
+.cert-line {
   position: absolute;
   left: 0;
   right: 0;
   margin: 0;
+  white-space: nowrap;
 }
 
-
 .cert-logo {
+  position: absolute;
   top: 12px;
+  left: 0;
+  right: 0;
   height: 78px;
   width: auto;
   max-width: 460px;
@@ -898,11 +906,11 @@ img {
 }
 
 .cert-title {
-  top: 94px;
+  top: 119px;
   font-family: var(--font-serif);
   font-size: 66px;
+  line-height: 23px;
   font-weight: 700;
-  line-height: 70px;
   letter-spacing: 10px;
   text-indent: 10px;
   color: var(--navy);
@@ -920,40 +928,10 @@ img {
   height: 2px;
 }
 
-.cert-rule-l {
-  left: 120px;
-}
-
-.cert-rule-r {
-  right: 120px;
-}
-
-.cert-rule-sm {
-  width: 118px;
-  left: auto;
-  right: auto;
-}
-
-.cert-rule-sm.cert-rule-l {
-  left: 130px;
-}
-
-.cert-rule-sm.cert-rule-r {
-  right: 130px;
-}
-
 .cert-dot {
   width: 12px;
   height: 12px;
   transform: rotate(45deg);
-}
-
-.cert-dot-l {
-  left: 284px;
-}
-
-.cert-dot-r {
-  right: 284px;
 }
 
 .cert-dot-sm {
@@ -961,57 +939,60 @@ img {
   height: 9px;
 }
 
-.cert-dot-sm.cert-dot-l {
-  left: 262px;
-}
-
-.cert-dot-sm.cert-dot-r {
-  right: 262px;
-}
-
-.cert-dot-c {
-  left: 50%;
-  margin-left: -6px;
-}
-
 /* ---------- OF PARTICIPATION ---------- */
-.cert-subtitle-row {
-  top: 172px;
-  height: 34px;
-  line-height: 34px;
-}
-
-.cert-subtitle-row .cert-rule {
-  top: 16px;
-}
-
-.cert-subtitle-row .cert-dot {
-  top: 11px;
-}
-
 .cert-subtitle {
-  display: block;
+  top: 188px;
   font-size: 27px;
+  line-height: 5px;
   font-weight: 600;
-  line-height: 34px;
   letter-spacing: 9px;
   text-indent: 9px;
   color: var(--navy);
 }
 
+.cert-rule-sub {
+  top: 189px;
+}
+
+.cert-rule-sub-l {
+  left: 120px;
+}
+
+.cert-rule-sub-r {
+  right: 120px;
+}
+
+.cert-dot-sub {
+  top: 184px;
+}
+
+.cert-dot-sub-l {
+  left: 284px;
+}
+
+.cert-dot-sub-r {
+  right: 284px;
+}
+
 /* ---------- Ribbon ---------- */
 .cert-ribbon {
+  position: absolute;
   top: 220px;
+  left: 0;
+  right: 0;
   height: 58px;
+  font-size: 0;
+  white-space: nowrap;
 }
 
 .cert-ribbon-body {
   display: inline-block;
   vertical-align: top;
-  padding: 11px 44px;
+  height: 58px;
+  padding: 24px 44px 0;
   font-size: 25px;
   font-weight: 700;
-  line-height: 30px;
+  line-height: 5px;
   letter-spacing: 4.5px;
   text-indent: 4.5px;
   color: #ffffff;
@@ -1054,58 +1035,57 @@ img {
 }
 
 /* ---------- Presented to ---------- */
-.cert-presented-row {
-  top: 296px;
-  height: 36px;
-  line-height: 36px;
-}
-
-.cert-presented-row .cert-rule {
-  top: 17px;
-}
-
-.cert-presented-row .cert-dot {
-  top: 13px;
-}
-
 .cert-presented {
-  display: block;
+  top: 298px;
   font-family: var(--font-serif);
   font-size: 24px;
+  line-height: 8px;
   font-style: italic;
-  line-height: 36px;
   color: #1f3a6e;
+}
+
+.cert-rule-pre {
+  top: 303px;
+  width: 118px;
+}
+
+.cert-rule-pre-l {
+  left: 130px;
+}
+
+.cert-rule-pre-r {
+  right: 130px;
+}
+
+.cert-dot-pre {
+  top: 300px;
+}
+
+.cert-dot-pre-l {
+  left: 262px;
+}
+
+.cert-dot-pre-r {
+  right: 262px;
 }
 
 /* ---------- Student name (largest dynamic element) ---------- */
 .cert-name {
-  top: 338px;
+  top: 365px;
   left: 80px;
   right: 80px;
-  height: 92px;
   font-family: var(--font-serif);
   font-size: 66px;
+  line-height: 23px;
   font-weight: 700;
-  line-height: 92px;
   letter-spacing: 1px;
   color: var(--navy);
-  white-space: nowrap;
 }
 
 /* Decorative divider under the name */
-.cert-divider {
-  top: 436px;
-  height: 14px;
-  line-height: 14px;
-}
-
-.cert-divider .cert-dot {
-  top: 1px;
-}
-
 .cert-divider-line {
   position: absolute;
-  top: 6px;
+  top: 436px;
   width: 250px;
   height: 2px;
   background-image: linear-gradient(90deg, rgba(201, 162, 77, 0) 0%, var(--gold) 100%);
@@ -1120,12 +1100,16 @@ img {
   background-image: linear-gradient(90deg, var(--gold) 0%, rgba(201, 162, 77, 0) 100%);
 }
 
+.cert-dot-div {
+  top: 431px;
+  left: 50%;
+  margin-left: -6px;
+}
+
 /* ---------- Body copy ---------- */
 .cert-body {
-  top: 462px;
-  height: 68px;
   font-size: 21px;
-  line-height: 34px;
+  line-height: 4px;
   color: #17306a;
 }
 
@@ -1134,23 +1118,33 @@ img {
   color: #1e5bd6;
 }
 
-.cert-appreciation-row {
-  top: 538px;
-  height: 62px;
+.cert-body-1 {
+  top: 477px;
+}
+
+.cert-body-2 {
+  top: 511px;
 }
 
 .cert-appreciation {
-  margin: 0;
   font-family: var(--font-serif);
   font-size: 19px;
+  line-height: 7px;
   font-style: italic;
-  line-height: 31px;
   color: #24365f;
+}
+
+.cert-appreciation-1 {
+  top: 548px;
+}
+
+.cert-appreciation-2 {
+  top: 579px;
 }
 
 .cert-star {
   position: absolute;
-  top: 18px;
+  top: 561px;
   width: 26px;
   height: 26px;
   background-repeat: no-repeat;
@@ -1159,41 +1153,38 @@ img {
   background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24' fill='%23c9a24d'%3E%3Cpath d='M12 1.8l3 6.1 6.7.9-4.9 4.7 1.2 6.7L12 17l-6 3.2 1.2-6.7L2.3 8.8 9 7.9z'/%3E%3C/svg%3E");
 }
 
-.cert-star-left {
+.cert-star-l {
   left: 168px;
 }
 
-.cert-star-right {
+.cert-star-r {
   right: 168px;
 }
 
 /* ---------- Footer: date, seal, signature ---------- */
-.cert-footer {
-  top: 612px;
-  height: 142px;
-}
-
 .cert-foot-col {
   position: absolute;
+  top: 0;
   width: 252px;
+  height: 754px;
   text-align: center;
 }
 
+/* Kept clear of the decorative navy corners */
 .cert-foot-date {
-  top: 22px;
-  left: 14px;
+  left: 120px;
 }
 
 .cert-foot-sign {
-  top: 30px;
-  right: 14px;
+  right: 120px;
 }
 
 .cert-cal-icon {
-  display: block;
+  position: absolute;
+  top: 632px;
+  left: 106px;
   width: 40px;
   height: 40px;
-  margin: 0 auto 10px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: 40px 40px;
@@ -1201,28 +1192,32 @@ img {
 }
 
 .cert-date {
-  display: block;
+  top: 689px;
   font-size: 24px;
+  line-height: 5px;
   font-weight: 700;
-  line-height: 30px;
   letter-spacing: 1.4px;
   color: var(--navy);
 }
 
 .cert-signature {
-  display: block;
-  width: auto;
+  position: absolute;
+  top: 630px;
+  left: 0;
+  right: 0;
   height: 76px;
+  width: auto;
   max-width: 230px;
-  margin: 0 auto 4px;
+  margin: 0 auto;
   object-fit: contain;
 }
 
 .cert-foot-line {
-  display: block;
-  width: 100%;
+  position: absolute;
+  top: 714px;
+  left: 0;
+  width: 252px;
   height: 2px;
-  margin-top: 8px;
   background-image: linear-gradient(
     90deg,
     rgba(201, 162, 77, 0) 0%,
@@ -1233,17 +1228,18 @@ img {
 }
 
 .cert-foot-label {
-  display: block;
-  margin-top: 8px;
+  top: 731px;
   font-size: 17px;
+  line-height: 3px;
   font-weight: 500;
-  line-height: 22px;
   letter-spacing: 2px;
   color: #2b3a5c;
 }
 
 .cert-foot-brand {
+  top: 730px;
   font-size: 22px;
+  line-height: 4px;
   font-weight: 700;
   letter-spacing: 1.6px;
   color: var(--navy);
@@ -1252,7 +1248,7 @@ img {
 /* AI seal, drawn from an SVG so it rasterises identically in the PDF */
 .cert-seal {
   position: absolute;
-  top: 14px;
+  top: 620px;
   left: 50%;
   width: 124px;
   height: 124px;

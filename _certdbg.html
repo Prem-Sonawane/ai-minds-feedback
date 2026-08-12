@@ -15,7 +15,7 @@
     rel="stylesheet"
   />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20710" />
 </head>
 
 <body>
@@ -23,7 +23,7 @@
        HEADER
        ============================================================ -->
   <header class="site-header fade-in">
-    <img src="logo.png" alt="AI Minds" class="site-logo" id="siteLogo" />
+    <img src="logo.svg" alt="AI Minds" class="site-logo" id="siteLogo" />
     <h1 class="site-title">AI Career Guidance Session Feedback</h1>
     <p class="site-subtitle">Complete the feedback form to receive your participation certificate.</p>
   </header>
@@ -121,7 +121,7 @@
           <p class="error-text" data-error-for="standard"></p>
         </div>
 
-        <!-- 6. Favourite AI Tool (logo cards, rendered by script.js) -->
+        <!-- 6. Favourite AI Tool (logo cards, rendered by script.js?v=20710) -->
         <div class="field">
           <span class="field-label" id="toolLabel">Which AI Tool did you like the most? <span class="req">*</span></span>
           <div class="tool-grid" id="toolGrid" role="radiogroup" aria-labelledby="toolLabel"></div>
@@ -272,7 +272,7 @@
 
         <div class="cert-content">
 
-          <img src="logo.png" alt="" class="cert-logo" id="certLogo" />
+          <img src="logo.svg" alt="" class="cert-logo" id="certLogo" />
 
           <h2 class="cert-line cert-title">CERTIFICATE</h2>
 
@@ -325,7 +325,7 @@
           <span class="cert-seal"></span>
 
           <footer class="cert-foot-col cert-foot-sign">
-            <img src="assets/signature.png" alt="" class="cert-signature" id="certSignature" />
+            <img src="signature.svg" alt="" class="cert-signature" id="certSignature" />
             <span class="cert-foot-line"></span>
             <span class="cert-line cert-foot-brand">AI MINDS</span>
           </footer>
@@ -343,5 +343,5 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script src="script.js"></script>
-</body>
+<style>body{margin:0;background:#fff}.page,.site-header,.site-footer{display:none!important}.certificate-stage{position:static!important;left:0!important}</style><script>window.addEventListener("load",async()=>{if(document.fonts&&document.fonts.ready)await document.fonts.ready;fillCertificate(decodeURIComponent(location.hash.slice(1))||"Prem Sonawane");try{const cv=await html2canvas(document.getElementById("certificate"),{scale:2,backgroundColor:"#ffffff",useCORS:true,logging:false,width:1123,height:794,scrollX:0,scrollY:0});const im=new Image();im.src=cv.toDataURL("image/png");document.getElementById("certificate").style.display="none";document.body.appendChild(im);document.body.setAttribute("data-dbg",JSON.stringify({title:getComputedStyle(document.querySelector(".cert-title")).top,name:getComputedStyle(document.getElementById("certName")).top,lh:getComputedStyle(document.querySelector(".cert-title")).lineHeight,rect:document.querySelector(".cert-title").getBoundingClientRect().top}));}catch(e){document.body.setAttribute("data-st","ERR "+e.message);}});</script></body>
 </html>
