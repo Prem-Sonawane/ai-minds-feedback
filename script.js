@@ -704,7 +704,7 @@ async function prepareCertificate(studentName) {
     dom.certPreviewSkeleton.classList.add("is-hidden");
 
     setCertificateStatus(
-      "Your certificate is ready. Tap the button below to download it.",
+      "Download your certificate below and keep it as a record of your participation.",
       "done"
     );
     dom.downloadBtn.disabled = false;
