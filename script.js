@@ -32,9 +32,7 @@ const AI_TOOLS = [
 /** Labels shown under the star rating. */
 const RATING_LABELS = ["Poor", "Fair", "Good", "Very Good", "Excellent"];
 
-/** Certificate canvas size — A4 landscape at 96 DPI. */
-const CERT_WIDTH_PX = 1123;
-const CERT_HEIGHT_PX = 794;
+/** Page size used for the PDF. */
 const A4_LANDSCAPE_MM = { width: 297, height: 210 };
 
 /* ------------------------------------------------------------
@@ -49,6 +47,8 @@ const state = {
   certificateNumber: "",
   /** Rendered certificate image, reused by every download. */
   certificateDataUrl: "",
+  /** Pixel size of that image, used to fit the PDF page. */
+  certificateSize: null,
   hasDownloaded: false
 };
 
@@ -64,9 +64,6 @@ const dom = {
   toolGrid: document.getElementById("toolGrid"),
   ratingStars: document.getElementById("ratingStars"),
   ratingCaption: document.getElementById("ratingCaption"),
-  certificate: document.getElementById("certificate"),
-  certName: document.getElementById("certName"),
-  certDate: document.getElementById("certDate"),
   certificateStatus: document.getElementById("certificateStatus"),
   certPreviewImg: document.getElementById("certPreviewImg"),
   certPreviewSkeleton: document.getElementById("certPreviewSkeleton"),
@@ -234,20 +231,6 @@ function useLogoFallback(img, label) {
   fallback.className = "tool-logo-fallback";
   fallback.textContent = label.charAt(0).toUpperCase();
   img.replaceWith(fallback);
-}
-
-/** Resolves once every image inside the element is loaded (or failed). */
-function waitForImages(element) {
-  const images = Array.from(element.querySelectorAll("img"));
-  return Promise.all(
-    images.map((img) => {
-      if (img.complete) return Promise.resolve();
-      return new Promise((resolve) => {
-        img.addEventListener("load", resolve, { once: true });
-        img.addEventListener("error", resolve, { once: true });
-      });
-    })
-  );
 }
 
 /* ------------------------------------------------------------
@@ -588,79 +571,120 @@ function toFileNameSafe(name) {
   );
 }
 
-/** Largest and smallest font size used for the student name. */
-const NAME_MAX_FONT_PX = 66;
+/* ------------------------------------------------------------
+   Certificate artwork.
+
+   assets/certificate-template.png is the finished design: logo,
+   headings, ribbon, seal, signature and borders are all baked into
+   it. Only the student name and the date are drawn on top.
+
+   Coordinates below are expressed in the template design space
+   (1492 x 1054, origin top-left). The canvas is created at the
+   artwork's native resolution and the drawing context is scaled by
+   one factor, so the coordinates are resolution independent and the
+   PDF keeps the full quality of the PNG.
+   ------------------------------------------------------------ */
+const TEMPLATE_SRC = "assets/certificate-template.png";
+const TEMPLATE_COORD_WIDTH = 1492;
+const TEMPLATE_COORD_HEIGHT = 1054;
+
+/** Student name: centred on this point, shrinking to stay inside maxWidth. */
+const NAME_ANCHOR = { x: 746, y: 585, maxWidth: 760 };
+const NAME_MAX_FONT_PX = 76;
 const NAME_MIN_FONT_PX = 30;
+const NAME_FONT_FAMILY = '"Playfair Display", Georgia, "Times New Roman", serif';
+const NAME_COLOR = "#0b2166";
 
-/** Where the name sits on the certificate, in certificate pixels. */
-const NAME_BASELINE_PX = 404;
+/** Date: centred on this point, e.g. "12 AUGUST 2026". */
+const DATE_ANCHOR = { x: 293, y: 920 };
+const DATE_FONT_PX = 27;
+const DATE_FONT_FAMILY =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+const DATE_COLOR = "#0b2166";
 
-/**
- * The name line uses a tight line-height so the browser and html2canvas
- * place the baseline identically (see the certificate notes in style.css).
- * These two ratios convert a font size into that line-height and into the
- * baseline offset below the element's top edge.
- */
-const NAME_LINE_HEIGHT_RATIO = 0.35;
-const NAME_BASELINE_RATIO = 0.592;
+/** Cached template image — loaded once, reused by every render. */
+let templatePromise = null;
 
-/**
- * Shrinks the name until it fits on a single line inside the frame, then
- * re-anchors it so the baseline stays put whatever the font size is.
- * Measured from the live element, so it is exact for any name length.
- */
-function fitStudentName() {
-  const nameEl = dom.certName;
-  const available = nameEl.clientWidth;
+/** Loads the certificate artwork (same origin, so the canvas stays clean). */
+function loadCertificateTemplate() {
+  if (templatePromise) return templatePromise;
 
-  let fontSize = NAME_MAX_FONT_PX;
-  nameEl.style.fontSize = `${fontSize}px`;
-
-  while (nameEl.scrollWidth > available && fontSize > NAME_MIN_FONT_PX) {
-    fontSize -= 2;
-    nameEl.style.fontSize = `${fontSize}px`;
-  }
-
-  nameEl.style.top = `${NAME_BASELINE_PX - NAME_BASELINE_RATIO * fontSize}px`;
-}
-
-/** Writes the student name and date onto the hidden certificate. */
-function fillCertificate(studentName) {
-  dom.certName.textContent = studentName;
-  fitStudentName();
-
-  // e.g. "12 AUGUST 2026"
-  dom.certDate.textContent = formatDisplayDate(new Date()).toUpperCase();
-}
-
-/**
- * Renders the hidden certificate markup to a PNG data URL.
- * This is the single source of truth for both the preview and the PDF.
- */
-async function renderCertificateImage(studentName) {
-  if (!window.html2canvas) {
-    throw new Error("Certificate renderer failed to load.");
-  }
-
-  // Web fonts must be ready before measuring the name or capturing.
-  if (document.fonts && document.fonts.ready) {
-    await document.fonts.ready;
-  }
-
-  fillCertificate(studentName);
-  await waitForImages(dom.certificate);
-
-  const canvas = await window.html2canvas(dom.certificate, {
-    scale: 2,
-    backgroundColor: "#ffffff",
-    useCORS: true,
-    logging: false,
-    width: CERT_WIDTH_PX,
-    height: CERT_HEIGHT_PX,
-    scrollX: 0,
-    scrollY: 0
+  templatePromise = new Promise((resolve, reject) => {
+    const image = new Image();
+    image.crossOrigin = "anonymous";
+    image.onload = () => resolve(image);
+    image.onerror = () => {
+      templatePromise = null;
+      reject(new Error("The certificate template could not be loaded."));
+    };
+    image.src = TEMPLATE_SRC;
   });
 
+  return templatePromise;
+}
+
+/** Makes sure the name font is ready before any text is measured. */
+async function waitForCertificateFont() {
+  if (!document.fonts || !document.fonts.load) return;
+
+  try {
+    await document.fonts.load(`700 ${NAME_MAX_FONT_PX}px ${NAME_FONT_FAMILY}`);
+    await document.fonts.ready;
+  } catch (error) {
+    // A missing web font only means the serif fallback is used.
+    console.warn("Certificate font could not be loaded:", error);
+  }
+}
+
+/**
+ * Picks the largest font size at which the name still fits the name area.
+ * Long names shrink; the name is never truncated.
+ */
+function fitNameFontSize(context, studentName) {
+  let fontSize = NAME_MAX_FONT_PX;
+
+  while (fontSize > NAME_MIN_FONT_PX) {
+    context.font = `700 ${fontSize}px ${NAME_FONT_FAMILY}`;
+    if (context.measureText(studentName).width <= NAME_ANCHOR.maxWidth) break;
+    fontSize -= 1;
+  }
+
+  context.font = `700 ${fontSize}px ${NAME_FONT_FAMILY}`;
+  return fontSize;
+}
+
+/**
+ * Draws the template plus the student name and date, and returns the
+ * finished certificate as a PNG data URL. This single image is what the
+ * preview shows and what the PDF embeds, so the two cannot differ.
+ */
+async function renderCertificateImage(studentName) {
+  const [template] = await Promise.all([
+    loadCertificateTemplate(),
+    waitForCertificateFont()
+  ]);
+
+  const canvas = document.createElement("canvas");
+  canvas.width = template.naturalWidth || TEMPLATE_COORD_WIDTH;
+  canvas.height = template.naturalHeight || TEMPLATE_COORD_HEIGHT;
+
+  const context = canvas.getContext("2d");
+  context.drawImage(template, 0, 0, canvas.width, canvas.height);
+
+  // Work in template design coordinates whatever the artwork resolution is.
+  context.scale(canvas.width / TEMPLATE_COORD_WIDTH, canvas.height / TEMPLATE_COORD_HEIGHT);
+  context.textAlign = "center";
+  context.textBaseline = "middle";
+
+  context.fillStyle = NAME_COLOR;
+  fitNameFontSize(context, studentName);
+  context.fillText(studentName, NAME_ANCHOR.x, NAME_ANCHOR.y);
+
+  context.fillStyle = DATE_COLOR;
+  context.font = `700 ${DATE_FONT_PX}px ${DATE_FONT_FAMILY}`;
+  context.fillText(formatDisplayDate(new Date()).toUpperCase(), DATE_ANCHOR.x, DATE_ANCHOR.y);
+
+  state.certificateSize = { width: canvas.width, height: canvas.height };
   return canvas.toDataURL("image/png");
 }
 
@@ -688,7 +712,7 @@ async function prepareCertificate(studentName) {
     console.error("Certificate generation failed:", error);
     dom.certPreviewSkeleton.classList.add("is-hidden");
     setCertificateStatus(
-      "Your feedback is saved, but the certificate preview could not be created. Tap the button below to try again.",
+      "Your feedback is saved, but the certificate could not be created. Check your connection and tap the button below to try again.",
       "error"
     );
     dom.downloadBtn.disabled = false;
@@ -727,13 +751,25 @@ async function downloadCertificate(event) {
       format: "a4"
     });
 
+    // Fit the artwork to the page, centred, without distorting it.
+    const size = state.certificateSize || {
+      width: TEMPLATE_COORD_WIDTH,
+      height: TEMPLATE_COORD_HEIGHT
+    };
+    const scale = Math.min(
+      A4_LANDSCAPE_MM.width / size.width,
+      A4_LANDSCAPE_MM.height / size.height
+    );
+    const width = size.width * scale;
+    const height = size.height * scale;
+
     pdf.addImage(
       state.certificateDataUrl,
       "PNG",
-      0,
-      0,
-      A4_LANDSCAPE_MM.width,
-      A4_LANDSCAPE_MM.height
+      (A4_LANDSCAPE_MM.width - width) / 2,
+      (A4_LANDSCAPE_MM.height - height) / 2,
+      width,
+      height
     );
     pdf.save(`Certificate_${toFileNameSafe(state.studentName)}.pdf`);
 
@@ -861,7 +897,7 @@ function init() {
   // Hide logo images that are missing so the layout stays clean.
   // The error may already have fired before this script ran, so the
   // loaded state is checked as well.
-  ["siteLogo", "certLogo", "certSignature"].forEach((id) => {
+  ["siteLogo"].forEach((id) => {
     const img = document.getElementById(id);
     if (!img) return;
 

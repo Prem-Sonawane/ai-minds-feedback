@@ -13,17 +13,19 @@ No login, no backend, no build step — just three files plus images.
 ## Files
 
 ```
-index.html            markup (form, success screen, hidden certificate)
+index.html            markup (form, success screen, certificate preview)
 style.css             all styling
-script.js             validation, Supabase insert, PDF generation
+script.js             validation, Supabase insert, certificate + PDF
 supabase-setup.sql    run once in the Supabase SQL editor
-logo.png              AI Minds logo  (add this)
-certificate-bg.png    optional certificate background (add this)
+logo.png              AI Minds logo shown in the page header (add this)
+assets/certificate-template.png   finished certificate artwork (2000 x 1414)
 assets/               chatgpt.png gemini.png gamma.png yoodli.png mapify.png napkin.png
 ```
 
 Missing images never break the page: tool logos fall back to a lettered blue
-tile, and the header/certificate logos are simply hidden.
+tile and the header logo is simply hidden. The certificate template is the one
+required image — without it the certificate reports an error instead of
+producing broken artwork.
 
 ## Setup (2 steps)
 
@@ -69,14 +71,15 @@ browser.
 - Contact fields use `inputmode="numeric"` with digit-only filtering rather than
   `<input type="number">` — this shows the numeric keypad on phones without the
   spinner arrows and scroll-wheel bugs that break phone entry.
-- The certificate is a real HTML block rendered off-screen at 1123 × 794 px
-  (A4 landscape at 96 DPI), captured with html2canvas at 2× and placed into a
-  jsPDF landscape A4 page. Edit the certificate wording in `index.html` and its
-  look under the "Certificate" section of `style.css`.
-- That same capture is shown as the on-screen preview, so the preview and the
-  PDF can never drift apart, and repeat downloads reuse the cached image.
-- Certificate numbers look like `AIM-2026-5F8D9A2C` (crypto random, unique
-  index in the database) and are printed in the top-right of the certificate.
+- The certificate is `assets/certificate-template.png` drawn onto a canvas at
+  its native resolution, with only the student name and date painted on top.
+  All artwork (logo, headings, ribbon, seal, signature, borders) lives in the
+  PNG — to change the design, replace the PNG.
+- Text is positioned in the template design space (1492 x 1054, origin
+  top-left) and the canvas scales that to the artwork's real pixel size, so the
+  result is identical on phones, tablets and desktops.
+- That one canvas image is both the on-screen preview and the image embedded in
+  the PDF, so the two cannot drift apart.
 - Downloading is manual by design — the student sees the certificate first.
   The **Download Certificate (PDF)** button is always on the success screen, so
   a blocked or missed download can be retried.
