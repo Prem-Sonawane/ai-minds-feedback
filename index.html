@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Career Guidance Session Feedback | AI Minds</title>
+  <meta name="description" content="Share your feedback on the AI Career Guidance Session and instantly receive your Certificate of Participation." />
+  <link rel="icon" href="logo.png" />
+
+  <!-- Display serif used by the certificate only (falls back to Georgia) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header fade-in">
+    <img src="logo.png" alt="AI Minds" class="site-logo" id="siteLogo" />
+    <h1 class="site-title">AI Career Guidance Session Feedback</h1>
+    <p class="site-subtitle">Complete the feedback form to receive your participation certificate.</p>
+  </header>
+
+  <main class="page">
+
+    <!-- ============================================================
+         FEEDBACK FORM
+         ============================================================ -->
+    <section class="card fade-in" id="formSection">
+      <form id="feedbackForm" novalidate>
+
+        <!-- 1. Student Name -->
+        <div class="field">
+          <label class="field-label" for="studentName">Student Name <span class="req">*</span></label>
+          <input
+            type="text"
+            id="studentName"
+            name="studentName"
+            class="input"
+            placeholder="Enter your full name"
+            autocomplete="name"
+            maxlength="60"
+            required
+          />
+          <p class="error-text" data-error-for="studentName"></p>
+        </div>
+
+        <!-- 2. Student Contact Number -->
+        <div class="field">
+          <label class="field-label" for="studentContact">Student Contact Number <span class="req">*</span></label>
+          <input
+            type="tel"
+            id="studentContact"
+            name="studentContact"
+            class="input"
+            placeholder="10 digit mobile number"
+            inputmode="numeric"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            data-digits-only="true"
+            autocomplete="tel"
+            required
+          />
+          <p class="error-text" data-error-for="studentContact"></p>
+        </div>
+
+        <!-- 3. Parent / Guardian Contact Number -->
+        <div class="field">
+          <label class="field-label" for="parentContact">Parent / Guardian Contact Number <span class="req">*</span></label>
+          <input
+            type="tel"
+            id="parentContact"
+            name="parentContact"
+            class="input"
+            placeholder="10 digit mobile number"
+            inputmode="numeric"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            data-digits-only="true"
+            required
+          />
+          <p class="error-text" data-error-for="parentContact"></p>
+        </div>
+
+        <!-- 4. School Name -->
+        <div class="field">
+          <label class="field-label" for="schoolName">School Name <span class="req">*</span></label>
+          <input
+            type="text"
+            id="schoolName"
+            name="schoolName"
+            class="input"
+            placeholder="Enter your school name"
+            maxlength="120"
+            required
+          />
+          <p class="error-text" data-error-for="schoolName"></p>
+        </div>
+
+        <!-- 5. Standard -->
+        <div class="field">
+          <label class="field-label" for="standard">Standard <span class="req">*</span></label>
+          <select id="standard" name="standard" class="input select" required>
+            <option value="" selected disabled>Select your standard</option>
+            <option value="5th">5th</option>
+            <option value="6th">6th</option>
+            <option value="7th">7th</option>
+            <option value="8th">8th</option>
+            <option value="9th">9th</option>
+            <option value="10th">10th</option>
+            <option value="11th">11th</option>
+            <option value="12th">12th</option>
+          </select>
+          <p class="error-text" data-error-for="standard"></p>
+        </div>
+
+        <!-- 6. Favourite AI Tool (logo cards, rendered by script.js) -->
+        <div class="field">
+          <span class="field-label" id="toolLabel">Which AI Tool did you like the most? <span class="req">*</span></span>
+          <div class="tool-grid" id="toolGrid" role="radiogroup" aria-labelledby="toolLabel"></div>
+          <p class="error-text" data-error-for="favoriteAiTool"></p>
+        </div>
+
+        <!-- 7. Star Rating (rendered by script.js) -->
+        <div class="field">
+          <span class="field-label" id="ratingLabel">How useful was the AI Session? <span class="req">*</span></span>
+          <div class="rating" id="ratingStars" role="radiogroup" aria-labelledby="ratingLabel"></div>
+          <p class="rating-caption" id="ratingCaption">Tap a star to rate</p>
+          <p class="error-text" data-error-for="rating"></p>
+        </div>
+
+        <!-- 8. Did the AI understand your questions or needs? -->
+        <fieldset class="field fieldset">
+          <legend class="field-label">Did the AI understand your questions or needs? <span class="req">*</span></legend>
+          <div class="choice-group">
+            <label class="choice">
+              <input type="radio" name="aiUnderstood" value="Yes" required />
+              <span class="choice-text">Yes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="aiUnderstood" value="Partly" />
+              <span class="choice-text">Partly</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="aiUnderstood" value="No" />
+              <span class="choice-text">No</span>
+            </label>
+          </div>
+          <p class="error-text" data-error-for="aiUnderstood"></p>
+        </fieldset>
+
+        <!-- 9. Would you use an AI session like this again? -->
+        <fieldset class="field fieldset">
+          <legend class="field-label">Would you use an AI session like this again? <span class="req">*</span></legend>
+          <div class="choice-group">
+            <label class="choice">
+              <input type="radio" name="reuseAi" value="Yes" required />
+              <span class="choice-text">Yes</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="reuseAi" value="Maybe" />
+              <span class="choice-text">Maybe</span>
+            </label>
+            <label class="choice">
+              <input type="radio" name="reuseAi" value="No" />
+              <span class="choice-text">No</span>
+            </label>
+          </div>
+          <p class="error-text" data-error-for="reuseAi"></p>
+        </fieldset>
+
+        <!-- 10. Open feedback -->
+        <div class="field">
+          <label class="field-label" for="feedback">What did you find most helpful about today's session? <span class="req">*</span></label>
+          <textarea
+            id="feedback"
+            name="feedback"
+            class="input textarea"
+            rows="5"
+            placeholder="Write your thoughts here..."
+            maxlength="1000"
+            required
+          ></textarea>
+          <p class="error-text" data-error-for="feedback"></p>
+        </div>
+
+        <!-- Form level status message -->
+        <p class="form-status" id="formStatus" role="alert"></p>
+
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+          <span class="spinner" aria-hidden="true"></span>
+          <span class="btn-label">Submit Feedback &amp; Get Certificate</span>
+        </button>
+
+        <p class="form-note">All fields are mandatory. Your certificate is generated instantly after submission.</p>
+      </form>
+    </section>
+
+    <!-- ============================================================
+         SUCCESS SCREEN — tick, certificate preview, download actions
+         ============================================================ -->
+    <section class="card success-card is-hidden" id="successSection" aria-live="polite">
+      <!-- Animated green tick -->
+      <svg class="tick" viewBox="0 0 52 52" aria-hidden="true">
+        <circle class="tick-circle" cx="26" cy="26" r="24" />
+        <path class="tick-check" d="M14 27 l8 8 l16 -16" />
+      </svg>
+
+      <h2 class="success-title">Feedback Submitted Successfully!</h2>
+      <p class="success-text">Thank you! Your certificate is ready below.</p>
+
+      <p class="certificate-status" id="certificateStatus">Generating your certificate...</p>
+
+      <!-- Preview image is rendered from the same certificate markup
+           that is placed into the PDF, so both always match. -->
+      <figure class="cert-preview" id="certPreview">
+        <div class="cert-preview-frame">
+          <div class="cert-preview-skeleton" id="certPreviewSkeleton">
+            <span class="spinner spinner-blue" aria-hidden="true"></span>
+          </div>
+          <img class="cert-preview-img is-hidden" id="certPreviewImg" alt="Preview of your Certificate of Participation" />
+        </div>
+      </figure>
+
+      <div class="success-actions">
+        <button type="button" class="btn btn-primary" id="downloadBtn" disabled>
+          <span class="btn-label">&#8595; Download Certificate (PDF)</span>
+        </button>
+        <button type="button" class="btn btn-secondary is-hidden" id="downloadAgainBtn">
+          Download Again
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="footerYear"></span> AI Minds &middot; AI Career Guidance Session</p>
+  </footer>
+
+  <!-- Lightweight confetti burst played once on success -->
+  <canvas class="confetti-canvas is-hidden" id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- ============================================================
+       CERTIFICATE (rendered off-screen, captured by html2canvas)
+       Fixed A4 landscape pixel size: 1123 x 794 (96 DPI)
+       ============================================================ -->
+  <div class="certificate-stage" aria-hidden="true">
+    <div class="certificate" id="certificate">
+      <div class="cert-frame">
+
+        <!-- Decorative navy corners with gold diagonals -->
+        <span class="cert-corner cert-corner-tl"></span>
+        <span class="cert-corner cert-corner-tr"></span>
+        <span class="cert-corner cert-corner-bl"></span>
+        <span class="cert-corner cert-corner-br"></span>
+        <span class="cert-corner-line cert-corner-line-tl"></span>
+        <span class="cert-corner-line cert-corner-line-tr"></span>
+        <span class="cert-corner-line cert-corner-line-bl"></span>
+        <span class="cert-corner-line cert-corner-line-br"></span>
+
+        <!-- Subtle AI / circuit background graphics -->
+        <span class="cert-tech cert-tech-left"></span>
+        <span class="cert-tech cert-tech-right"></span>
+
+        <div class="cert-content">
+
+          <img src="logo.png" alt="" class="cert-logo" id="certLogo" />
+
+          <h2 class="cert-title">CERTIFICATE</h2>
+
+          <div class="cert-subtitle-row">
+            <span class="cert-rule cert-rule-l"></span>
+            <span class="cert-dot cert-dot-l"></span>
+            <span class="cert-subtitle">OF PARTICIPATION</span>
+            <span class="cert-dot cert-dot-r"></span>
+            <span class="cert-rule cert-rule-r"></span>
+          </div>
+
+          <div class="cert-ribbon"><span class="cert-ribbon-tail cert-ribbon-tail-left"></span
+            ><span class="cert-ribbon-body">LEVEL 1 AI WORKSHOP</span
+            ><span class="cert-ribbon-tail cert-ribbon-tail-right"></span></div>
+
+          <div class="cert-presented-row">
+            <span class="cert-rule cert-rule-sm cert-rule-l"></span>
+            <span class="cert-dot cert-dot-sm cert-dot-l"></span>
+            <span class="cert-presented">This certificate is proudly presented to</span>
+            <span class="cert-dot cert-dot-sm cert-dot-r"></span>
+            <span class="cert-rule cert-rule-sm cert-rule-r"></span>
+          </div>
+
+          <!-- Student name — filled from the submitted form data -->
+          <p class="cert-name" id="certName">Student Name</p>
+
+          <div class="cert-divider">
+            <span class="cert-divider-line cert-divider-line-l"></span>
+            <span class="cert-dot cert-dot-c"></span>
+            <span class="cert-divider-line cert-divider-line-r"></span>
+          </div>
+
+          <p class="cert-body">
+            For successfully attending the <strong>Level 1 AI Workshop</strong><br />
+            and actively participating in the session feedback.
+          </p>
+
+          <div class="cert-appreciation-row">
+            <span class="cert-star cert-star-left"></span>
+            <p class="cert-appreciation">
+              We appreciate your enthusiasm towards learning Artificial Intelligence<br />
+              and wish you success in your future journey.
+            </p>
+            <span class="cert-star cert-star-right"></span>
+          </div>
+
+          <footer class="cert-footer">
+            <div class="cert-foot-col cert-foot-date">
+              <span class="cert-cal-icon"></span>
+              <span class="cert-date" id="certDate">DATE</span>
+              <span class="cert-foot-line"></span>
+              <span class="cert-foot-label">DATE</span>
+            </div>
+
+            <span class="cert-seal"></span>
+
+            <div class="cert-foot-col cert-foot-sign">
+              <img src="assets/signature.png" alt="" class="cert-signature" id="certSignature" />
+              <span class="cert-foot-line"></span>
+              <span class="cert-foot-label cert-foot-brand">AI MINDS</span>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       LIBRARIES (CDN)
+       ============================================================ -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="script.js"></script>
+</body>
+</html>

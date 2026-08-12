@@ -1,0 +1,1359 @@
+/* ============================================================
+   AI Minds — Feedback + Certificate
+   Theme tokens
+   ============================================================ */
+:root {
+  --white: #ffffff;
+  --blue: #1e40af;
+  --blue-dark: #1b3a9c;
+  --blue-darker: #17318a;
+  --blue-light: #dbeafe;
+  --blue-tint: #eff6ff;
+  --text: #1f2937;
+  --text-muted: #6b7280;
+  --border: #e5e7eb;
+  --green: #16a34a;
+  --red: #dc2626;
+  --star: #f59e0b;
+
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow: 0 1px 3px rgba(16, 24, 40, 0.1), 0 1px 2px rgba(16, 24, 40, 0.06);
+  --shadow-lg: 0 10px 24px rgba(16, 24, 40, 0.08), 0 2px 6px rgba(16, 24, 40, 0.04);
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Playfair Display", "Georgia", "Times New Roman", "Times", serif;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--white);
+  background-image: linear-gradient(180deg, var(--blue-tint) 0%, var(--white) 380px);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  text-align: center;
+  padding: 40px 20px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.site-logo {
+  height: 72px;
+  width: auto;
+  margin: 0 auto 20px;
+  object-fit: contain;
+}
+
+.site-title {
+  margin: 0 0 8px;
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--blue);
+}
+
+.site-subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 20px 56px;
+}
+
+.card {
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 36px;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 0 20px 32px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ============================================================
+   Form fields
+   ============================================================ */
+.field {
+  margin-bottom: 28px;
+}
+
+.field:last-of-type {
+  margin-bottom: 24px;
+}
+
+.fieldset {
+  border: 0;
+  padding: 0;
+  margin-inline: 0;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.req {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--text);
+  background-color: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+.input:hover {
+  border-color: #cbd5e1;
+}
+
+.input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.6;
+}
+
+/* Native select with a custom chevron */
+.select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 40px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px 18px;
+  cursor: pointer;
+}
+
+/* Invalid state */
+.input.is-invalid {
+  border-color: var(--red);
+}
+
+.input.is-invalid:focus {
+  box-shadow: 0 0 0 3px #fee2e2;
+}
+
+.error-text {
+  display: none;
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--red);
+}
+
+.error-text.is-visible {
+  display: block;
+}
+
+.form-note {
+  margin: 14px 0 0;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.form-status {
+  display: none;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--red);
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-sm);
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+/* ============================================================
+   Radio choice pills
+   ============================================================ */
+.choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.choice:hover {
+  border-color: var(--blue);
+  background-color: var(--blue-tint);
+}
+
+.choice input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #cbd5e1;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.choice input[type="radio"]:checked {
+  border-color: var(--blue);
+  border-width: 5px;
+}
+
+.choice input[type="radio"]:focus-visible {
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+.choice:has(input[type="radio"]:checked) {
+  border-color: var(--blue);
+  background-color: var(--blue-tint);
+  box-shadow: 0 0 0 1px var(--blue);
+}
+
+/* ============================================================
+   AI tool logo cards
+   ============================================================ */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.tool-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 18px 12px;
+  text-align: center;
+  background-color: var(--white);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease,
+    box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.tool-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 8px 18px rgba(16, 24, 40, 0.1);
+  transform: translateY(-3px) scale(1.03);
+}
+
+/* The real radio stays in the DOM for form semantics, but is not shown */
+.tool-card input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.tool-logo {
+  width: 46px;
+  height: 46px;
+  object-fit: contain;
+}
+
+/* Fallback tile used when a logo PNG is missing */
+.tool-logo-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background-color: var(--blue-light);
+  color: var(--blue);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tool-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+
+/* Check badge, revealed only on the selected card */
+.tool-check {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  color: var(--white);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.tool-check svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Selected state: royal blue border + blue tint + check + soft pop */
+.tool-card.is-selected {
+  border-color: var(--blue);
+  background-color: var(--blue-tint);
+  transform: scale(1.03);
+  box-shadow: 0 0 0 3px var(--blue-light), 0 6px 16px rgba(30, 64, 175, 0.16);
+  animation: tool-pop 0.26s ease-out;
+}
+
+.tool-card.is-selected .tool-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.tool-card:focus-within {
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+@keyframes tool-pop {
+  0% {
+    transform: scale(1);
+  }
+  55% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+
+/* ============================================================
+   Star rating
+   ============================================================ */
+.rating {
+  display: flex;
+  gap: 6px;
+}
+
+.star-btn {
+  padding: 2px;
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 0;
+  color: #d1d5db;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.star-btn svg {
+  width: 38px;
+  height: 38px;
+  fill: currentColor;
+}
+
+.star-btn:hover {
+  transform: scale(1.12);
+}
+
+.star-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+.star-btn.is-active {
+  color: var(--star);
+}
+
+.rating-caption {
+  margin: 8px 0 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   Buttons
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 22px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease,
+    transform 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  color: var(--white);
+  background-color: var(--blue);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--blue-dark);
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:active {
+  background-color: var(--blue-darker);
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  color: var(--blue);
+  background-color: var(--white);
+  border-color: var(--blue);
+}
+
+.btn-secondary:hover {
+  background-color: var(--blue-tint);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--blue-light);
+}
+
+.btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner inside the submit button */
+.spinner {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+.btn.is-loading .spinner {
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================
+   Success screen
+   ============================================================ */
+.success-card {
+  text-align: center;
+  padding: 56px 36px;
+}
+
+.success-title {
+  margin: 20px 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.success-text {
+  margin: 0 0 24px;
+  font-size: 17px;
+  color: var(--text-muted);
+}
+
+.certificate-status {
+  margin: 0 auto 20px;
+  padding: 12px 18px;
+  max-width: 460px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--blue);
+  background-color: var(--blue-tint);
+  border: 1px solid var(--blue-light);
+  border-radius: var(--radius-sm);
+}
+
+.certificate-status.is-done {
+  color: var(--green);
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.certificate-status.is-error {
+  color: var(--red);
+  background-color: #fef2f2;
+  border-color: #fecaca;
+}
+
+/* Action buttons stack on mobile, sit side by side on desktop */
+.success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.success-actions .btn {
+  width: auto;
+  min-width: 240px;
+  flex: 0 1 auto;
+}
+
+/* ------------------------------------------------------------
+   Certificate preview
+   The image is the exact canvas that goes into the PDF.
+   ------------------------------------------------------------ */
+.cert-preview {
+  margin: 8px 0 0;
+}
+
+.cert-preview-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1123 / 794;
+  overflow: hidden;
+  background-color: var(--blue-tint);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+}
+
+.cert-preview-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: fade-in 0.4s ease-out both;
+}
+
+.cert-preview-skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner-blue {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-color: var(--blue-light);
+  border-top-color: var(--blue);
+}
+
+.cert-preview-caption {
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------
+   Confetti overlay
+   ------------------------------------------------------------ */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 60;
+}
+
+/* Animated green tick */
+.tick {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto;
+  display: block;
+}
+
+.tick-circle {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 2.5;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: tick-circle 0.6s ease-out forwards;
+}
+
+.tick-check {
+  fill: none;
+  stroke: var(--green);
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: tick-check 0.35s 0.5s ease-out forwards;
+}
+
+@keyframes tick-circle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tick-check {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ============================================================
+   Fade in
+   ============================================================ */
+.fade-in {
+  animation: fade-in 0.45s ease-out both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================================
+   Certificate — A4 landscape (1123 x 794 px @ 96 DPI)
+   Kept off-screen (not display:none) so html2canvas can capture it.
+   ============================================================ */
+.certificate-stage {
+  position: absolute;
+  top: 0;
+  left: -20000px;
+  width: 1123px;
+  height: 794px;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.certificate {
+  /* Certificate-only palette (does not affect the site theme) */
+  --navy-deep: #061334;
+  --navy: #0b2166;
+  --navy-mid: #16337f;
+  --gold: #c9a24d;
+  --gold-light: #edd79b;
+  --panel: #f8fafd;
+
+  position: relative;
+  width: 1123px;
+  height: 794px;
+  overflow: hidden;
+  background-color: var(--navy);
+  background-image:
+    url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cg fill='%23ffffff' fill-opacity='0.16'%3E%3Ccircle cx='6' cy='6' r='2'/%3E%3Ccircle cx='26' cy='6' r='2'/%3E%3Ccircle cx='46' cy='6' r='2'/%3E%3Ccircle cx='6' cy='26' r='2'/%3E%3Ccircle cx='26' cy='26' r='2'/%3E%3Ccircle cx='46' cy='26' r='2'/%3E%3Ccircle cx='6' cy='46' r='2'/%3E%3Ccircle cx='26' cy='46' r='2'/%3E%3Ccircle cx='46' cy='46' r='2'/%3E%3C/g%3E%3C/svg%3E"),
+    linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-mid) 45%, var(--navy-deep) 100%);
+  font-family: var(--font);
+  color: var(--navy);
+}
+
+/* Thin gold rule between the navy edge and the white panel */
+.cert-frame {
+  position: absolute;
+  inset: 18px;
+  overflow: hidden;
+  background-color: var(--panel);
+  background-image: linear-gradient(160deg, #ffffff 0%, #f3f7fd 55%, #eef4fc 100%);
+  border: 2px solid var(--gold);
+}
+
+/* ---------- Decorative navy corners with gold diagonals ---------- */
+.cert-corner,
+.cert-corner-line {
+  position: absolute;
+}
+
+.cert-corner {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+}
+
+.cert-corner-tl {
+  top: 0;
+  left: 0;
+  border-width: 132px 132px 0 0;
+  border-top-color: var(--navy);
+}
+
+.cert-corner-tr {
+  top: 0;
+  right: 0;
+  border-width: 0 132px 132px 0;
+  border-right-color: var(--navy);
+}
+
+.cert-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-width: 132px 0 0 132px;
+  border-left-color: var(--navy);
+}
+
+.cert-corner-br {
+  bottom: 0;
+  right: 0;
+  border-width: 0 0 132px 132px;
+  border-bottom-color: var(--navy);
+}
+
+.cert-corner-line {
+  width: 222px;
+  height: 2px;
+  background-color: var(--gold);
+}
+
+.cert-corner-line-tl {
+  top: 77px;
+  left: -33px;
+  transform: rotate(-45deg);
+}
+
+.cert-corner-line-tr {
+  top: 77px;
+  right: -33px;
+  transform: rotate(45deg);
+}
+
+.cert-corner-line-bl {
+  bottom: 77px;
+  left: -33px;
+  transform: rotate(45deg);
+}
+
+.cert-corner-line-br {
+  bottom: 77px;
+  right: -33px;
+  transform: rotate(-45deg);
+}
+
+/* ---------- Subtle AI / circuit background graphics ---------- */
+.cert-tech {
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 100%;
+  opacity: 0.5;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='754' fill='none' stroke='%231e40af' stroke-width='2' stroke-opacity='0.28'%3E%3Cpath d='M6 86H84V160H168M30 200H108V286H180M0 340H66V420H150M18 476H96V562H176M44 610H122V688H190'/%3E%3Cpath d='M120 38V114H210M140 722V656H220'/%3E%3Cg fill='%231e40af' fill-opacity='0.22' stroke='none'%3E%3Ccircle cx='84' cy='160' r='7'/%3E%3Ccircle cx='108' cy='286' r='7'/%3E%3Ccircle cx='66' cy='420' r='7'/%3E%3Ccircle cx='96' cy='562' r='7'/%3E%3Ccircle cx='122' cy='688' r='7'/%3E%3Ccircle cx='210' cy='114' r='5'/%3E%3Ccircle cx='220' cy='656' r='5'/%3E%3C/g%3E%3Cg stroke-opacity='0.2'%3E%3Cpath d='M56 238l30-17 30 17v32l-30 17-30-17z'/%3E%3Cpath d='M18 438l26-15 26 15v29l-26 15-26-15z'/%3E%3Cpath d='M96 92l22-13 22 13v25l-22 13-22-13z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cert-tech-left {
+  left: 0;
+}
+
+/* Mirrored so both sides share one asset */
+.cert-tech-right {
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* ------------------------------------------------------------
+   Content.
+   Every block is absolutely positioned on the fixed 1083 x 754
+   canvas: html2canvas reproduces this exactly, and the student
+   name can grow or shrink without moving anything else.
+   ------------------------------------------------------------ */
+.cert-content {
+  position: absolute;
+  inset: 0;
+  text-align: center;
+}
+
+.cert-content > * {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0;
+}
+
+
+.cert-logo {
+  top: 12px;
+  height: 78px;
+  width: auto;
+  max-width: 460px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.cert-title {
+  top: 94px;
+  font-family: var(--font-serif);
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 70px;
+  letter-spacing: 10px;
+  text-indent: 10px;
+  color: var(--navy);
+}
+
+/* ---------- Gold rules and diamonds ---------- */
+.cert-rule,
+.cert-dot {
+  position: absolute;
+  background-color: var(--gold);
+}
+
+.cert-rule {
+  width: 150px;
+  height: 2px;
+}
+
+.cert-rule-l {
+  left: 120px;
+}
+
+.cert-rule-r {
+  right: 120px;
+}
+
+.cert-rule-sm {
+  width: 118px;
+  left: auto;
+  right: auto;
+}
+
+.cert-rule-sm.cert-rule-l {
+  left: 130px;
+}
+
+.cert-rule-sm.cert-rule-r {
+  right: 130px;
+}
+
+.cert-dot {
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+}
+
+.cert-dot-l {
+  left: 284px;
+}
+
+.cert-dot-r {
+  right: 284px;
+}
+
+.cert-dot-sm {
+  width: 9px;
+  height: 9px;
+}
+
+.cert-dot-sm.cert-dot-l {
+  left: 262px;
+}
+
+.cert-dot-sm.cert-dot-r {
+  right: 262px;
+}
+
+.cert-dot-c {
+  left: 50%;
+  margin-left: -6px;
+}
+
+/* ---------- OF PARTICIPATION ---------- */
+.cert-subtitle-row {
+  top: 172px;
+  height: 34px;
+  line-height: 34px;
+}
+
+.cert-subtitle-row .cert-rule {
+  top: 16px;
+}
+
+.cert-subtitle-row .cert-dot {
+  top: 11px;
+}
+
+.cert-subtitle {
+  display: block;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: 9px;
+  text-indent: 9px;
+  color: var(--navy);
+}
+
+/* ---------- Ribbon ---------- */
+.cert-ribbon {
+  top: 220px;
+  height: 58px;
+}
+
+.cert-ribbon-body {
+  display: inline-block;
+  vertical-align: top;
+  padding: 11px 44px;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 4.5px;
+  text-indent: 4.5px;
+  color: #ffffff;
+  background-color: var(--navy);
+  background-image: linear-gradient(180deg, var(--navy-mid) 0%, var(--navy) 60%, var(--navy-deep) 100%);
+  border: 2px solid var(--gold);
+}
+
+/* Folded tails on both sides of the ribbon */
+.cert-ribbon-tail {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 44px;
+  height: 42px;
+  margin-top: 11px;
+  background-color: var(--navy);
+  background-image: linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+}
+
+.cert-ribbon-tail::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 21px 0 21px 15px;
+  border-color: transparent transparent transparent var(--panel);
+}
+
+.cert-ribbon-tail-left::after {
+  left: 0;
+}
+
+.cert-ribbon-tail-right::after {
+  right: 0;
+  border-width: 21px 15px 21px 0;
+  border-color: transparent var(--panel) transparent transparent;
+}
+
+/* ---------- Presented to ---------- */
+.cert-presented-row {
+  top: 296px;
+  height: 36px;
+  line-height: 36px;
+}
+
+.cert-presented-row .cert-rule {
+  top: 17px;
+}
+
+.cert-presented-row .cert-dot {
+  top: 13px;
+}
+
+.cert-presented {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-style: italic;
+  line-height: 36px;
+  color: #1f3a6e;
+}
+
+/* ---------- Student name (largest dynamic element) ---------- */
+.cert-name {
+  top: 338px;
+  left: 80px;
+  right: 80px;
+  height: 92px;
+  font-family: var(--font-serif);
+  font-size: 66px;
+  font-weight: 700;
+  line-height: 92px;
+  letter-spacing: 1px;
+  color: var(--navy);
+  white-space: nowrap;
+}
+
+/* Decorative divider under the name */
+.cert-divider {
+  top: 436px;
+  height: 14px;
+  line-height: 14px;
+}
+
+.cert-divider .cert-dot {
+  top: 1px;
+}
+
+.cert-divider-line {
+  position: absolute;
+  top: 6px;
+  width: 250px;
+  height: 2px;
+  background-image: linear-gradient(90deg, rgba(201, 162, 77, 0) 0%, var(--gold) 100%);
+}
+
+.cert-divider-line-l {
+  left: 270px;
+}
+
+.cert-divider-line-r {
+  right: 270px;
+  background-image: linear-gradient(90deg, var(--gold) 0%, rgba(201, 162, 77, 0) 100%);
+}
+
+/* ---------- Body copy ---------- */
+.cert-body {
+  top: 462px;
+  height: 68px;
+  font-size: 21px;
+  line-height: 34px;
+  color: #17306a;
+}
+
+.cert-body strong {
+  font-weight: 700;
+  color: #1e5bd6;
+}
+
+.cert-appreciation-row {
+  top: 538px;
+  height: 62px;
+}
+
+.cert-appreciation {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-style: italic;
+  line-height: 31px;
+  color: #24365f;
+}
+
+.cert-star {
+  position: absolute;
+  top: 18px;
+  width: 26px;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 26px 26px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 24 24' fill='%23c9a24d'%3E%3Cpath d='M12 1.8l3 6.1 6.7.9-4.9 4.7 1.2 6.7L12 17l-6 3.2 1.2-6.7L2.3 8.8 9 7.9z'/%3E%3C/svg%3E");
+}
+
+.cert-star-left {
+  left: 168px;
+}
+
+.cert-star-right {
+  right: 168px;
+}
+
+/* ---------- Footer: date, seal, signature ---------- */
+.cert-footer {
+  top: 612px;
+  height: 142px;
+}
+
+.cert-foot-col {
+  position: absolute;
+  width: 252px;
+  text-align: center;
+}
+
+.cert-foot-date {
+  top: 22px;
+  left: 14px;
+}
+
+.cert-foot-sign {
+  top: 30px;
+  right: 14px;
+}
+
+.cert-cal-icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  margin: 0 auto 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 40px 40px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 48 48'%3E%3Ccircle cx='24' cy='24' r='24' fill='%230b2166'/%3E%3Crect x='13' y='15' width='22' height='20' rx='3' fill='%23ffffff'/%3E%3Cg fill='%230b2166'%3E%3Crect x='16' y='21' width='16' height='2'/%3E%3Crect x='17' y='26' width='4' height='4'/%3E%3Crect x='23' y='26' width='4' height='4'/%3E%3Crect x='29' y='26' width='3' height='4'/%3E%3C/g%3E%3Cg fill='%23ffffff'%3E%3Crect x='17' y='11' width='3' height='7' rx='1.5'/%3E%3Crect x='28' y='11' width='3' height='7' rx='1.5'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.cert-date {
+  display: block;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+  letter-spacing: 1.4px;
+  color: var(--navy);
+}
+
+.cert-signature {
+  display: block;
+  width: auto;
+  height: 76px;
+  max-width: 230px;
+  margin: 0 auto 4px;
+  object-fit: contain;
+}
+
+.cert-foot-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: 8px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(201, 162, 77, 0) 0%,
+    var(--gold) 20%,
+    var(--gold) 80%,
+    rgba(201, 162, 77, 0) 100%
+  );
+}
+
+.cert-foot-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 2px;
+  color: #2b3a5c;
+}
+
+.cert-foot-brand {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: var(--navy);
+}
+
+/* AI seal, drawn from an SVG so it rasterises identically in the PDF */
+.cert-seal {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 124px;
+  height: 124px;
+  margin-left: -62px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 124px 124px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='124' height='124' viewBox='0 0 140 140'%3E%3Ccircle cx='70' cy='70' r='68' fill='%23c9a24d'/%3E%3Ccircle cx='70' cy='70' r='61' fill='%23edd79b'/%3E%3Ccircle cx='70' cy='70' r='55' fill='%23c9a24d'/%3E%3Ccircle cx='70' cy='70' r='49' fill='%230b2166'/%3E%3Ccircle cx='70' cy='70' r='44' fill='none' stroke='%23c9a24d' stroke-width='1.5'/%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.6' stroke-opacity='0.85'%3E%3Cpath d='M70 34v14M70 92v14M34 70h14M92 70h14M45 45l10 10M95 95l-10-10M95 45l-10 10M45 95l10-10'/%3E%3C/g%3E%3Cg fill='%23ffffff' fill-opacity='0.85'%3E%3Ccircle cx='70' cy='32' r='3'/%3E%3Ccircle cx='70' cy='108' r='3'/%3E%3Ccircle cx='32' cy='70' r='3'/%3E%3Ccircle cx='108' cy='70' r='3'/%3E%3Ccircle cx='43' cy='43' r='2.6'/%3E%3Ccircle cx='97' cy='97' r='2.6'/%3E%3Ccircle cx='97' cy='43' r='2.6'/%3E%3Ccircle cx='43' cy='97' r='2.6'/%3E%3C/g%3E%3Crect x='52' y='52' width='36' height='36' rx='6' fill='none' stroke='%23ffffff' stroke-width='1.6' stroke-opacity='0.9'/%3E%3Ctext x='70' y='79' font-family='Helvetica, Arial, sans-serif' font-size='23' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3EAI%3C/text%3E%3Cg fill='%23c9a24d'%3E%3Cpath d='M54 116l1.6 3.2 3.5.5-2.5 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.5-2.5 3.5-.5z'/%3E%3Cpath d='M70 116l1.6 3.2 3.5.5-2.5 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.5-2.5 3.5-.5z'/%3E%3Cpath d='M86 116l1.6 3.2 3.5.5-2.5 2.5.6 3.5-3.2-1.7-3.2 1.7.6-3.5-2.5-2.5 3.5-.5z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 640px) {
+  .site-header {
+    padding: 28px 18px 20px;
+  }
+
+  .site-logo {
+    height: 58px;
+  }
+
+  .site-title {
+    font-size: 23px;
+  }
+
+  .site-subtitle {
+    font-size: 15px;
+  }
+
+  .page {
+    padding: 0 14px 40px;
+  }
+
+  .card {
+    padding: 22px 18px;
+    border-radius: var(--radius);
+  }
+
+  .success-card {
+    padding: 40px 20px;
+  }
+
+  .tool-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .star-btn svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .choice {
+    padding: 9px 15px;
+    font-size: 14.5px;
+  }
+
+  .success-title {
+    font-size: 24px;
+  }
+
+  /* Buttons stack and fill the width on small screens */
+  .success-actions {
+    flex-direction: column;
+    margin-top: 20px;
+  }
+
+  .success-actions .btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .certificate-status {
+    font-size: 14.5px;
+  }
+
+  .cert-preview-caption {
+    font-size: 12.5px;
+  }
+}
+
+/* Very small phones: one tool card per row stays readable at 2 columns,
+   so only tighten the padding further. */
+@media (max-width: 380px) {
+  .tool-card {
+    padding: 14px 8px;
+  }
+
+  .tool-name {
+    font-size: 13px;
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
