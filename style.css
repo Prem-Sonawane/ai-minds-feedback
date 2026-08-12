@@ -74,9 +74,13 @@ img {
   margin: 0 auto;
 }
 
+/* Scales inside these bounds, so the logo keeps its own aspect ratio
+   whatever its dimensions are. */
 .site-logo {
-  height: 72px;
   width: auto;
+  height: auto;
+  max-height: 118px;
+  max-width: min(100%, 340px);
   margin: 0 auto 20px;
   object-fit: contain;
 }
@@ -738,7 +742,9 @@ img {
   }
 
   .site-logo {
-    height: 58px;
+    max-height: 92px;
+    max-width: min(100%, 260px);
+    margin-bottom: 16px;
   }
 
   .site-title {
